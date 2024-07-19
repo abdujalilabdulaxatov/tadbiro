@@ -84,4 +84,28 @@ class AuthHtppServices extends ChangeNotifier {
       return {"error": data["error"]["message"], "check": false};
     }
   }
+
+  Future<void> changeUserInfo(
+      String userId, String name, String surname) async {
+    String id = "";
+    Uri url = Uri.parse(
+        "https://tadbiro-2eeb6-default-rtdb.firebaseio.com/users.json");
+    var response = await http.get(url);
+    var data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      data.forEach((key, value) async {
+        if (value["user"]["user_id"] == userId) {
+          id = key;
+          print("$id      id");
+          Uri url2 = Uri.parse(
+              "https://tadbiro-2eeb6-default-rtdb.firebaseio.com/users/$id/user/.json");
+          await http.patch(url,
+              body: jsonEncode({
+                "name": name,
+                "surName": surname,
+              }));
+        }
+      });
+    }
+  }
 }

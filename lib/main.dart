@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tadbiro_ap/controller/event_controller.dart';
+import 'package:tadbiro_ap/controller/user_controller.dart';
 import 'package:tadbiro_ap/services/events/event_http_services.dart';
 import 'package:tadbiro_ap/services/login/auth_htpp_services.dart';
 import 'package:tadbiro_ap/ui/screens/home/home_screen.dart';
-import 'package:tadbiro_ap/ui/screens/home/my_tadbir/my_tadbir.dart';
-import 'package:tadbiro_ap/ui/screens/home/my_tadbir/add_event.dart';
-import 'package:tadbiro_ap/ui/screens/login/sign_in.dart';
-import 'package:tadbiro_ap/ui/screens/login/sign_up.dart';
+import 'package:tadbiro_ap/ui/screens/home/settings_page.dart';
 import 'package:tadbiro_ap/ui/screens/login/splash_screen.dart';
 
 void main(List<String> args) {
@@ -30,6 +28,7 @@ class Tadbiro extends StatelessWidget {
           ChangeNotifierProvider(create: (ctx) => AuthHtppServices()),
           ChangeNotifierProvider(create: (ctx) => EventHttpServices()),
           ChangeNotifierProvider(create: (ctx) => EventController()),
+          ChangeNotifierProvider(create: (ctx) => UserController()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

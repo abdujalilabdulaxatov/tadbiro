@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tadbiro_ap/ui/screens/home/home_screen.dart';
 import 'package:tadbiro_ap/ui/widgets/reminder_alert_dialog.dart';
 
 class SuggestAlertDialog extends StatefulWidget {
@@ -23,13 +24,21 @@ class _SuggestAlertDialogState extends State<SuggestAlertDialog> {
           ),
           const Text(
             "Tabriklaymiz!",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
           ),
           const Gap(20),
           const Text(
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been",
             textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              color: Colors.black,
+            ),
           ),
           const Gap(20),
           GestureDetector(
@@ -62,8 +71,7 @@ class _SuggestAlertDialogState extends State<SuggestAlertDialog> {
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
-              showDialog(
-                  context: context, builder: (ctx) => ReminderAlertDialog());
+              showDialog(context: context, builder: (ctx) => HomeScreen());
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -77,7 +85,11 @@ class _SuggestAlertDialogState extends State<SuggestAlertDialog> {
                 child: const Center(
                   child: Text(
                     "Bosh sahifa",
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),

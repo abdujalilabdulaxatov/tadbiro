@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tadbiro_ap/data/event_model.dart';
+import 'package:tadbiro_ap/ui/screens/home/my_tadbir/widgets/event_sign_in.dart';
 import 'package:tadbiro_ap/ui/widgets/suggest_alert_dialog.dart';
 import 'package:tadbiro_ap/ui/widgets/event_details_item.dart';
 
 class EventDetails extends StatefulWidget {
-  const EventDetails({
+  EventModel eventModel;
+  EventDetails(
+    this.eventModel, {
     super.key,
   });
 
@@ -42,13 +45,16 @@ class _EventDetailsState extends State<EventDetails> {
                     Container(
                         width: 45,
                         height: 45,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.white, shape: BoxShape.circle),
                         child: IconButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(CupertinoIcons.left_chevron))),
+                            icon: const Icon(
+                              CupertinoIcons.left_chevron,
+                              color: Colors.black,
+                            ))),
                     Container(
                       width: 45,
                       height: 45,
@@ -56,7 +62,10 @@ class _EventDetailsState extends State<EventDetails> {
                           color: Colors.white, shape: BoxShape.circle),
                       child: IconButton(
                           onPressed: () {},
-                          icon: const Icon(CupertinoIcons.heart_fill)),
+                          icon: const Icon(
+                            CupertinoIcons.heart_fill,
+                            color: Colors.black,
+                          )),
                     )
                   ],
                 ),
@@ -69,16 +78,17 @@ class _EventDetailsState extends State<EventDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "kjsnfjksdfn skjfnsekjfnksejf wekejfnekjfnsejk kjnfkj",
-                  style: TextStyle(
+                Text(
+                  widget.eventModel.description,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 const Gap(20),
-                for (int i = 0; i < 3; i++) EventDetailsItem(),
+                for (int i = 0; i < 3; i++)
+                  EventDetailsItem(index: i, widget.eventModel),
                 const Gap(20),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
@@ -94,10 +104,15 @@ class _EventDetailsState extends State<EventDetails> {
                     ),
                     title: Text(
                       "Alisher Zokirov",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          color: Colors.black),
                     ),
-                    subtitle: Text("Tadbir tashkilotchisi"),
+                    subtitle: Text(
+                      "Tadbir tashkilotchisi",
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
                 const Gap(60),
@@ -127,174 +142,7 @@ class _EventDetailsState extends State<EventDetails> {
                   color: Colors.amber,
                 ),
                 const Gap(40),
-                GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.yellow,
-                        context: context,
-                        builder: (ctx) {
-                          return SizedBox(
-                            height: 750,
-                            child: ListView(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 30),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            "Ro'yhatdan o'tish",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 24),
-                                          ),
-                                          CircleAvatar(
-                                            backgroundColor: Colors.white70,
-                                            radius: 20,
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                icon: const Icon(Icons.clear)),
-                                          )
-                                        ],
-                                      ),
-                                      Gap(30),
-                                      const Text(
-                                        "Joylar sonini tanlang: ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18),
-                                      ),
-                                      const Gap(40),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundColor: Colors.white70,
-                                            radius: 25,
-                                            child: IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons.remove)),
-                                          ),
-                                          const Gap(20),
-                                          const Text(
-                                            "0",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 26),
-                                          ),
-                                          const Gap(20),
-                                          CircleAvatar(
-                                            backgroundColor: Colors.white70,
-                                            radius: 25,
-                                            child: IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons.add)),
-                                          ),
-                                        ],
-                                      ),
-                                      const Gap(20),
-                                      const Text(
-                                        "To'lov turini tanlang:",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18),
-                                      ),
-                                      const Gap(20),
-                                      for (int i = 0; i < 3; i++)
-                                        GestureDetector(
-                                          child: Container(
-                                            height: 60,
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 20),
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(15)),
-                                            child: const ListTile(
-                                              trailing:
-                                                  Icon(Icons.circle_outlined),
-                                              leading: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child: Image(
-                                                  image: AssetImage(
-                                                      "asset/images/paypal.png"),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              title: Text("Paypal"),
-                                            ),
-                                          ),
-                                        ),
-                                      const Gap(60),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                          showDialog(
-                                              context: context,
-                                              builder: (ctx) =>
-                                                  SuggestAlertDialog());
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 50),
-                                          child: Container(
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                                color: Colors.orange,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            child: const Center(
-                                              child: Text(
-                                                "Keyingi",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 17,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Colors.yellowAccent, width: 1),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: const Center(
-                        child: Text(
-                          "Ro'yhatdan o'tish",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                EventSignIn()
               ],
             ),
           ),

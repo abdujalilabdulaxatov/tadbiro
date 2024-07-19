@@ -75,4 +75,10 @@ class EventHttpServices extends ChangeNotifier {
     print(" http");
     return lst;
   }
+
+  Future<void> deleteEvent(String eventId) async {
+    Uri url = Uri.parse(
+        "https://tadbiro-2eeb6-default-rtdb.firebaseio.com/events/$eventId.json");
+    await http.delete(url);
+  }
 }

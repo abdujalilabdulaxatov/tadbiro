@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tadbiro_ap/data/event_model.dart';
 
 class EventDetailsItem extends StatefulWidget {
-  const EventDetailsItem({super.key});
+  final int index;
+  EventModel eventModel;
+  EventDetailsItem(
+    this.eventModel, {
+    super.key,
+    required this.index,
+  });
 
   @override
   State<EventDetailsItem> createState() => _EventDetailsItemState();

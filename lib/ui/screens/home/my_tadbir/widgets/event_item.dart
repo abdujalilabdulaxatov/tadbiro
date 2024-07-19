@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 import 'package:tadbiro_ap/data/event_model.dart';
+import 'package:tadbiro_ap/services/events/event_http_services.dart';
 import 'package:tadbiro_ap/ui/screens/home/event_details.dart';
 
 class EventItem extends StatefulWidget {
@@ -15,14 +17,18 @@ class EventItem extends StatefulWidget {
 class _EventItemState extends State<EventItem> {
   @override
   Widget build(BuildContext context) {
+    final eventItem = Provider.of<EventHttpServices>(context);
     return ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         itemCount: widget.lst.length,
         itemBuilder: (ctx, index) {
           return GestureDetector(
             onTap: () {
+              print(widget.lst[index].description);
               Navigator.push(
-                  context, MaterialPageRoute(builder: (ctx) => EventDetails()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (ctx) => EventDetails(widget.lst[index])));
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
@@ -38,7 +44,9 @@ class _EventItemState extends State<EventItem> {
                     width: 140,
                     height: 130,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        image: DecorationImage(
+                            image: AssetImage("asset/images/images.jpeg"),
+                            fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(10)),
                   ),
                   const Gap(10),
@@ -78,16 +86,24 @@ class _EventItemState extends State<EventItem> {
                                                     color: Colors.black),
                                               ),
                                             )),
-                                            const PopupMenuItem(
-                                                child: SizedBox(
-                                              width: 100,
-                                              child: Text(
-                                                "O'chirish",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black),
-                                              ),
-                                            )),
+                                            PopupMenuItem(
+                                                onTap: () {
+                                                  print(widget.lst[0].event_id);
+
+                                                  eventItem.deleteEvent(widget
+                                                      .lst[index].event_id);
+                                                  setState(() {});
+                                                },
+                                                child: const SizedBox(
+                                                  width: 100,
+                                                  child: Text(
+                                                    "O'chirish",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: Colors.black),
+                                                  ),
+                                                )),
                                           ]),
                                 ],
                               ),
